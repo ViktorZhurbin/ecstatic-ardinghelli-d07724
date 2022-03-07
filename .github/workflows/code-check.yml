@@ -1,0 +1,24 @@
+name: code-check
+on:
+    push:
+        paths:
+            - "src/**"
+
+jobs:
+    code-check:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Install packages
+              run: yarn
+
+            - name: Lint
+              run: yarn lint
+
+            - name: Typecheck
+              run: yarn typecheck
+
+            - name: Test
+              run: yarn test
