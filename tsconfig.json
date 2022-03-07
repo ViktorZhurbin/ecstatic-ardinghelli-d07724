@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+        "src/*": ["src/*"],
+        "assets/*": ["assets/*"]
+    },
     "jsx": "react-jsx",
     "target": "esnext",
     "module": "esnext",
@@ -29,6 +34,7 @@
   },
   "include": [
     "src",
+    "assets",
     "webpack",
     "declaration.d.ts",
     "jest.config.ts",
