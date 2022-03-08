@@ -1,4 +1,4 @@
-import { Layout } from "./components/Layout";
+import { Layout } from "./components/Layout/Layout";
 import { GlobalStyle } from "./globalStyle";
 
 export const App = () => (

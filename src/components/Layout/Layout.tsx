@@ -1,8 +1,10 @@
+import { Header } from "../Header/Header";
+
 import { Wrapper } from "./Layout.style";
 
 export const Layout = () => (
   <Wrapper>
-    <header>Bitcasino.io</header>
+    <Header />
     <main></main>
     <footer>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
