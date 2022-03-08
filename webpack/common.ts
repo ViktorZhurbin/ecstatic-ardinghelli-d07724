@@ -20,7 +20,11 @@ export const commonConfig: Configuration = {
   module: {
     rules: [
       {
-        test: /\.(png|jpe?g|ico|svg)$/,
+        test: /\.svg$/,
+        use: ["@svgr/webpack"],
+      },
+      {
+        test: /\.(png|jpe?g|ico)$/,
         type: "asset/resource",
         include: [
           path.resolve(__dirname, "../assets"),
