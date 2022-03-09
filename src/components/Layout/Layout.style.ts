@@ -18,6 +18,9 @@ export const Wrapper = styled.div`
 `;
 
 export const Main = styled.main`
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
   padding: 30px var(--horizontal-padding);
   background-image: url(${figure});
   background-repeat: no-repeat;
