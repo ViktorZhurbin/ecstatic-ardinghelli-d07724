@@ -1,12 +1,14 @@
 import LogoIcon from "../../../assets/icons/logo.svg";
 
-import { Wrapper } from "./Header.style";
+import { Logo, Wrapper } from "./Header.style";
 
 export const Header = () => {
   return (
     <Wrapper>
-      <LogoIcon />
-      Bitcasino.io
+      <Logo>
+        <LogoIcon />
+        Bitcasino.io
+      </Logo>
     </Wrapper>
   );
 };
