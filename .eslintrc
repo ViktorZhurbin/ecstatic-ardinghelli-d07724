@@ -7,13 +7,13 @@
         "@typescript-eslint",
         "jest-dom",
         "prettier",
-        "react-hooks",
         "react"
     ],
     "extends": [
         "eslint:recommended",
         "plugin:jest-dom/recommended",
         "plugin:prettier/recommended",
+        "plugin:react-hooks/recommended",
         "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
