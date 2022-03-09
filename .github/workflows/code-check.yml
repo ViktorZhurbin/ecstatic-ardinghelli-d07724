@@ -19,6 +19,3 @@ jobs:
 
             - name: Typecheck
               run: yarn typecheck
-
-            - name: Test
-              run: yarn test

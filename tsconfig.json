@@ -29,6 +29,7 @@
   },
   "include": [
     "src",
+    "assets",
     "webpack",
     "declaration.d.ts",
     "jest.config.ts",
