@@ -1,12 +1,17 @@
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
 
-import { Wrapper } from "./Layout.style";
+import { Main, Subtitle, Title, Wrapper } from "./Layout.style";
 
 export const Layout = () => (
   <Wrapper>
     <Header />
-    <main></main>
+    <Main>
+      <Title>Now you can track all your cryptos here!</Title>
+      <Subtitle>
+        Just enter the cryptocurrency code on the form to the right
+      </Subtitle>
+    </Main>
     <Footer />
   </Wrapper>
 );
