@@ -1,3 +1,4 @@
+import { CurrencyForm } from "../CurrencyForm/CurrencyForm";
 import { CurrencyItem } from "../CurrencyItem/CurrencyItem";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
@@ -26,6 +27,7 @@ export const Layout = () => (
           </div>
         </Content>
       </Left>
+      <CurrencyForm />
     </Main>
     <Footer />
   </Wrapper>

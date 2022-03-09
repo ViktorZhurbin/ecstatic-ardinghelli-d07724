@@ -41,7 +41,7 @@ export const RemoveIcon = styled.div`
   position: relative;
   width: var(--size);
   height: var(--size);
-  padding: 12px;
+  padding: var(--size);
   cursor: pointer;
   opacity: 0.6;
   transition: opacity 0.1s ease-in;
@@ -57,6 +57,7 @@ export const RemoveIcon = styled.div`
     left: 50%;
     height: inherit;
     width: 2px;
+    top: calc(var(--size) / 2);
     background-color: var(--color-white);
   }
 

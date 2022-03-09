@@ -15,6 +15,8 @@ export const GlobalStyle = createGlobalStyle`
         --color-white: #fff;
         --color-bg: #2a0a4a;
         --color-subtitle: #9484a4;
+        --color-grey: #bcbec2;
+        --color-orange: #fd4b24;
     }
 
     body, h1, h2 {
