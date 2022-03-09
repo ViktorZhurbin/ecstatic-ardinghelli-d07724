@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
 
         --color-white: #fff;
         --color-bg: #2a0a4a;
+        --color-subtitle: #9484a4;
     }
 
     body, h1, h2 {
