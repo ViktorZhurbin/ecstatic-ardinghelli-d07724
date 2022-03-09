@@ -24,3 +24,25 @@ export const Main = styled.main`
   background-size: contain;
   background-position: center;
 `;
+
+export const Left = styled.div`
+  display: grid;
+  gap: 20px;
+  width: 35%;
+`;
+
+export const Title = styled.h1`
+  font-size: 2.5rem;
+  font-weight: normal;
+`;
+
+export const Content = styled.div`
+  display: grid;
+  gap: 30px;
+  max-width: 300px;
+`;
+
+export const Hint = styled.h2`
+  color: var(--color-subtitle);
+  font-weight: normal;
+`;
