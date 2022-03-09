@@ -7,7 +7,6 @@
   "scripts": {
     "start": "webpack serve --config webpack/dev.ts",
     "build": "webpack --config webpack/prod.ts",
-    "test": "jest",
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "postinstall": "npx simple-git-hooks"
