@@ -9,8 +9,8 @@ export const Wrapper = styled.div`
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  color: white;
-  background-color: #2a0a4a;
+  color: var(--color-white);
+  background-color: var(--color-bg);
   background-image: url(${bg});
   background-position: right -125% top -200px;
   background-repeat: no-repeat;
@@ -23,12 +23,4 @@ export const Main = styled.main`
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-`;
-
-export const Title = styled.h1`
-  margin: 0;
-`;
-
-export const Subtitle = styled.h2`
-  margin: 0;
 `;

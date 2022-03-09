@@ -26,10 +26,6 @@ export const commonConfig: Configuration = {
       {
         test: /\.(png|jpe?g|ico)$/,
         type: "asset/resource",
-        include: [
-          path.resolve(__dirname, "../assets"),
-          path.resolve(__dirname, "../src"),
-        ],
         generator: {
           filename: "[name][ext]",
         },

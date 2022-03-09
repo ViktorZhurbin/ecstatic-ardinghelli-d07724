@@ -13,9 +13,10 @@ export const GlobalStyle = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
 
         --color-white: #fff;
+        --color-bg: #2a0a4a;
     }
 
-    body {
+    body, h1, h2 {
         margin: 0;
     }
 `;
