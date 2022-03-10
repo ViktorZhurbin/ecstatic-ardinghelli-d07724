@@ -54,6 +54,7 @@ export const Terms = styled.div`
 
 export const SearchResults = styled.div`
   position: absolute;
+  color: var(--color-black);
   background-color: var(--color-white);
   top: 100%;
   width: 100%;
@@ -63,7 +64,6 @@ export const SearchResults = styled.div`
   border-radius: 4px;
   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
     0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
-  color: var(--color-black);
 `;
 
 export const SearchResultItem = styled.div`

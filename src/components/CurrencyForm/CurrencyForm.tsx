@@ -56,14 +56,14 @@ export const CurrencyForm = () => {
                 data &&
                 data.assets.length > 0 &&
                 data.assets.map(({ assetSymbol, assetName }) => {
-                  const handleSetValue = () => {
+                  const handleSetInput = () => {
                     setInput(assetSymbol);
                     setShowResults(false);
                   };
 
                   const handleKeyDown = (event: React.KeyboardEvent) => {
                     if (event.key === "Enter") {
-                      handleSetValue();
+                      handleSetInput();
                     }
                   };
 
@@ -72,7 +72,7 @@ export const CurrencyForm = () => {
                       key={assetSymbol}
                       tabIndex={0}
                       onKeyDown={handleKeyDown}
-                      onClick={handleSetValue}
+                      onClick={handleSetInput}
                     >
                       {assetName} - {assetSymbol}
                     </SearchResultItem>
