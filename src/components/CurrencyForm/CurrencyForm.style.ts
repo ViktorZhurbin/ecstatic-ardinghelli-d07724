@@ -14,15 +14,24 @@ export const Form = styled.form`
   gap: 12px;
 `;
 
-export const TextField = styled.div`
+interface TextFieldProps {
+  error: boolean;
+}
+
+export const TextField = styled.div<TextFieldProps>`
+  --horizontal-indent: 10px;
+  --color: ${(props) =>
+    props.error ? "var(--color-red)" : "var(--color-grey)"};
+
   position: relative;
   display: grid;
+  color: var(--color);
 `;
 
 export const Label = styled.label`
   text-transform: uppercase;
   font-size: 0.6rem;
-  transform: translate(8px, 50%);
+  transform: translate(var(--horizontal-indent), 50%);
   background-color: var(--color-white);
   width: max-content;
   padding: 0 4px;
@@ -30,10 +39,15 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   border-radius: 4px;
-  border: 1px solid var(--color-grey);
+  border: 1px solid var(--color);
   font-size: 0.875rem;
   line-height: 1.5;
-  padding: 10px;
+  padding: 12px var(--horizontal-indent);
+`;
+
+export const HelperText = styled.label`
+  margin: 3px var(--horizontal-indent) 0;
+  font-size: 0.75rem;
 `;
 
 export const Button = styled.button`
@@ -66,12 +80,15 @@ export const SearchResults = styled.div`
     0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
 `;
 
-export const SearchResultItem = styled.div`
+export const SearchResultInfo = styled.div`
   display: flex;
   align-items: center;
   font-size: 1rem;
   line-height: 1.5;
   padding: 6px 16px;
+`;
+
+export const SearchResultItem = styled(SearchResultInfo)`
   cursor: pointer;
 
   &:focus {

@@ -7,8 +7,10 @@ import { Market } from "../../types/Market";
 import {
   Button,
   Form,
+  HelperText,
   Input,
   Label,
+  SearchResultInfo,
   SearchResultItem,
   SearchResults,
   Terms,
@@ -22,6 +24,7 @@ interface CurrencyFormProps {
 
 export const CurrencyForm = ({ onSubmit }: CurrencyFormProps) => {
   const [input, setInput] = useState("");
+  const [error, setError] = useState<string>();
   const [assetSymbol, setAssetSymbol] = useState("");
   const [currency, setCurrency] = useState<Market>();
   const [showResults, setShowResults] = useState(false);
@@ -54,6 +57,7 @@ export const CurrencyForm = ({ onSubmit }: CurrencyFormProps) => {
   }, [marketData]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setError(undefined);
     setShowResults(true);
     setInput(event.target.value);
   };
@@ -63,13 +67,15 @@ export const CurrencyForm = ({ onSubmit }: CurrencyFormProps) => {
 
     if (currency) {
       onSubmit(currency);
+    } else {
+      setError(`No prices available for ${assetSymbol}`);
     }
   };
 
   return (
     <Wrapper>
       <Form>
-        <TextField>
+        <TextField error={Boolean(error)}>
           <Label htmlFor="code">Cryptocurrency code</Label>
           <Input
             type="text"
@@ -79,11 +85,12 @@ export const CurrencyForm = ({ onSubmit }: CurrencyFormProps) => {
             value={input}
             onChange={handleChange}
           />
+          {error && <HelperText htmlFor="code">{error}</HelperText>}
           {showResults && (
             <SearchResults>
-              {loading && <SearchResultItem>Loading...</SearchResultItem>}
+              {loading && <SearchResultInfo>Loading...</SearchResultInfo>}
               {!loading && !assetData?.assets.length && (
-                <SearchResultItem>No results</SearchResultItem>
+                <SearchResultInfo>No results</SearchResultInfo>
               )}
               {assetData &&
                 assetData.assets.map(({ assetSymbol, assetName }) => {
