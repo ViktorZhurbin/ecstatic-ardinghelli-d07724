@@ -1,7 +1,7 @@
 import CupIcon from "../../../assets/icons/currencyCupWithCrown.svg";
 
 import {
-  Code,
+  Symbol,
   Info,
   Item,
   Price,
@@ -10,21 +10,26 @@ import {
 } from "./CurrencyItem.style";
 
 interface CurrencyItemProps {
-  code: string;
-  price: string;
+  symbol: string;
+  price?: string;
+  onClickRemove: () => void;
 }
 
-export const CurrencyItem = ({ code, price }: CurrencyItemProps) => {
+export const CurrencyItem = ({
+  symbol,
+  price,
+  onClickRemove,
+}: CurrencyItemProps) => {
   return (
     <Wrapper>
       <Item>
         <CupIcon />
         <Info>
-          <Code>{code}</Code>
-          <Price>{price}</Price>
+          <Symbol>{symbol}</Symbol>
+          <Price>{price || "N/A"}</Price>
         </Info>
       </Item>
-      <RemoveIcon />
+      <RemoveIcon onClick={onClickRemove} />
     </Wrapper>
   );
 };

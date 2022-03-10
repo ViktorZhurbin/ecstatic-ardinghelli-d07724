@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-
 import { useSearchAssetsBySymbol } from "../../graphql/asset/search";
+
+import { useGetMarkets } from "../../graphql/market/get";
+import { Market } from "../../types/Market";
 
 import {
   Button,
@@ -14,25 +16,54 @@ import {
   Wrapper,
 } from "./CurrencyForm.style";
 
-export const CurrencyForm = () => {
+interface CurrencyFormProps {
+  onSubmit: (market: Market) => void;
+}
+
+export const CurrencyForm = ({ onSubmit }: CurrencyFormProps) => {
+  const [input, setInput] = useState("");
   const [assetSymbol, setAssetSymbol] = useState("");
+  const [currency, setCurrency] = useState<Market>();
   const [showResults, setShowResults] = useState(false);
 
-  const { data, loading, refetch } = useSearchAssetsBySymbol(assetSymbol);
+  const { data: assetData, loading, refetch } = useSearchAssetsBySymbol(input);
+  const {
+    data: marketData,
+    loading: marketsLoading,
+    refetch: marketsRefetch,
+  } = useGetMarkets(assetSymbol);
 
   useEffect(() => {
-    if (assetSymbol && showResults) {
-      refetch({ assetSymbol });
+    if (input && showResults) {
+      refetch({ baseSymbol: input });
     }
-  }, [assetSymbol, refetch, showResults]);
+  }, [input, refetch, showResults]);
+
+  useEffect(() => {
+    if (assetSymbol) {
+      marketsRefetch({ symbol: assetSymbol });
+    }
+  }, [assetSymbol, marketsRefetch]);
+
+  useEffect(() => {
+    const currency =
+      marketData?.markets.find(({ ticker }) => Boolean(ticker?.lastPrice)) ||
+      marketData?.markets[0];
+
+    setCurrency(currency);
+  }, [marketData]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setShowResults(true);
-    setAssetSymbol(event.target.value);
+    setInput(event.target.value);
   };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+
+    if (currency) {
+      onSubmit(currency);
+    }
   };
 
   return (
@@ -45,25 +76,26 @@ export const CurrencyForm = () => {
             id="code"
             name="code"
             autoComplete="off"
-            value={assetSymbol}
+            value={input}
             onChange={handleChange}
           />
           {showResults && (
             <SearchResults>
-              {loading ? (
-                <SearchResultItem>Loading...</SearchResultItem>
-              ) : (
-                data &&
-                data.assets.length > 0 &&
-                data.assets.map(({ assetSymbol, assetName }) => {
-                  const handleSetInput = () => {
+              {loading && <SearchResultItem>Loading...</SearchResultItem>}
+              {!loading && !assetData?.assets.length && (
+                <SearchResultItem>No results</SearchResultItem>
+              )}
+              {assetData &&
+                assetData.assets.map(({ assetSymbol, assetName }) => {
+                  const handleSetAsset = () => {
+                    setInput(assetSymbol);
                     setAssetSymbol(assetSymbol);
                     setShowResults(false);
                   };
 
                   const handleKeyDown = (event: React.KeyboardEvent) => {
                     if (event.key === "Enter") {
-                      handleSetInput();
+                      handleSetAsset();
                     }
                   };
 
@@ -72,13 +104,12 @@ export const CurrencyForm = () => {
                       key={assetSymbol}
                       tabIndex={0}
                       onKeyDown={handleKeyDown}
-                      onClick={handleSetInput}
+                      onClick={handleSetAsset}
                     >
-                      {assetName} - {assetSymbol}
+                      {assetSymbol} - {assetName}
                     </SearchResultItem>
                   );
-                })
-              )}
+                })}
             </SearchResults>
           )}
         </TextField>

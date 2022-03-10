@@ -3,7 +3,7 @@ import { gql, useQuery } from "@apollo/client";
 import { Asset } from "../../types/Asset";
 
 const SEARCH_ASSETS_BY_SYMBOL = gql`
-  query currency($symbol: String!) {
+  query searchCurrency($symbol: String!) {
     assets(filter: { assetSymbol: { _like: $symbol } }) {
       assetName
       assetSymbol
@@ -11,8 +11,8 @@ const SEARCH_ASSETS_BY_SYMBOL = gql`
   }
 `;
 
-export const useSearchAssetsBySymbol = (assetSymbol?: string) =>
+export const useSearchAssetsBySymbol = (symbol?: string) =>
   useQuery<{ assets: Asset[] }>(SEARCH_ASSETS_BY_SYMBOL, {
-    variables: { assetSymbol: `${assetSymbol}%` },
-    skip: !assetSymbol,
+    variables: { symbol: `${symbol}%` },
+    skip: !symbol,
   });
