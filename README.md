@@ -1,6 +1,6 @@
 ## Prepare
 
-Make a copy of `.env.example`, name it `.env.local`, and add values for the listed environment variables.
+Make a copy of `.env.example`, name it `.env`, and add values for the listed environment variables.
 
 ## Available Scripts
 
