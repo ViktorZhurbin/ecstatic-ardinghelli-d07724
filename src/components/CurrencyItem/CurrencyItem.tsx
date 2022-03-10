@@ -20,12 +20,12 @@ export const CurrencyItem = ({
   price,
   onClickRemove,
 }: CurrencyItemProps) => {
-  const formattedPrice = price
-    ? new Intl.NumberFormat("en", {
+  const formattedPrice = !price
+    ? "N/A"
+    : new Intl.NumberFormat("de-DE", {
         style: "currency",
         currency: "EUR",
-      }).format(Number(price))
-    : "N/A";
+      }).format(Number(price));
 
   return (
     <Wrapper>

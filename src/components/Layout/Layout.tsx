@@ -23,6 +23,7 @@ export const Layout = () => {
     );
 
     if (isUnique) {
+      setFormError(undefined);
       setCurrencies([...currencies, currency]);
     } else {
       setFormError(`${currency.baseSymbol} is already listed`);
@@ -61,7 +62,11 @@ export const Layout = () => {
             </div>
           </Content>
         </Left>
-        <CurrencyForm error={formError} onSubmit={handleAddCurrency} />
+        <CurrencyForm
+          error={formError}
+          setError={setFormError}
+          onSubmit={handleAddCurrency}
+        />
       </Main>
       <Footer />
     </Wrapper>

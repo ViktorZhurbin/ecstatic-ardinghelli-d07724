@@ -17,20 +17,19 @@ import {
 
 interface CurrencyFormProps {
   error?: string;
+  setError: (error?: string) => void;
   onSubmit: (market: Currency) => void;
 }
 
 export const CurrencyForm = ({
-  error: errorProp,
+  error,
+  setError,
   onSubmit,
 }: CurrencyFormProps) => {
   const [input, setInput] = useState("");
-  const [error, setError] = useState(errorProp);
   const [assetSymbol, setAssetSymbol] = useState("");
   const [currency, setCurrency] = useState<Currency>();
   const [showResults, setShowResults] = useState(false);
-
-  const errorMessage = error || errorProp;
 
   const {
     data: marketData,
@@ -77,7 +76,7 @@ export const CurrencyForm = ({
   return (
     <Wrapper>
       <Form>
-        <TextField error={Boolean(errorMessage)}>
+        <TextField error={Boolean(error)}>
           <Label htmlFor="code">Cryptocurrency code</Label>
           <Input
             type="text"
@@ -87,9 +86,7 @@ export const CurrencyForm = ({
             value={input}
             onChange={handleChange}
           />
-          {errorMessage && (
-            <HelperText htmlFor="code">{errorMessage}</HelperText>
-          )}
+          {error && <HelperText htmlFor="code">{error}</HelperText>}
           <SearchResults
             open={showResults}
             query={input}
