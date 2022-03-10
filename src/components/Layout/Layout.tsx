@@ -22,7 +22,7 @@ export const Layout = () => (
           </Hint>
           <div>
             {mockData.map(({ code, price }) => (
-              <CurrencyItem code={code} price={price} />
+              <CurrencyItem key={code} code={code} price={price} />
             ))}
           </div>
         </Content>

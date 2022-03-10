@@ -13,7 +13,10 @@ export const GlobalStyle = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
 
         --color-white: #fff;
+        --color-black: rgba(0, 0, 0, 0.87);
         --color-bg: #2a0a4a;
+        --color-bg-grey: rgba(0, 0, 0, 0.12);
+        --color-bg-light-grey: rgba(0, 0, 0, 0.04);
         --color-subtitle: #9484a4;
         --color-grey: #bcbec2;
         --color-orange: #fd4b24;

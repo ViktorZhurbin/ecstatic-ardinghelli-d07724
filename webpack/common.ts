@@ -5,6 +5,7 @@ import { Configuration as WebpackDevServerConfiguration } from "webpack-dev-serv
 
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import Dotenv from "dotenv-webpack";
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
@@ -41,6 +42,7 @@ export const commonConfig: Configuration = {
     extensions: [".tsx", ".ts", ".js", ".json"],
   },
   plugins: [
+    new Dotenv(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "../public/index.html"),
       favicon: path.resolve(__dirname, "../public/favicon.ico"),
