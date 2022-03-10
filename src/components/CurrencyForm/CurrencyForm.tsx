@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useSearchAssetsBySymbol } from "../../graphql/asset/search";
 
-import { useGetMarkets } from "../../graphql/market/get";
-import { Market } from "../../types/Market";
+import { useGetCurrencies } from "../../graphql/currency/get";
+import { Currency } from "../../types/Currency";
+import { SearchResults } from "../SearchResults/SearchResults";
 
 import {
   Button,
@@ -10,37 +10,33 @@ import {
   HelperText,
   Input,
   Label,
-  SearchResultInfo,
-  SearchResultItem,
-  SearchResults,
   Terms,
   TextField,
   Wrapper,
 } from "./CurrencyForm.style";
 
 interface CurrencyFormProps {
-  onSubmit: (market: Market) => void;
+  error?: string;
+  onSubmit: (market: Currency) => void;
 }
 
-export const CurrencyForm = ({ onSubmit }: CurrencyFormProps) => {
+export const CurrencyForm = ({
+  error: errorProp,
+  onSubmit,
+}: CurrencyFormProps) => {
   const [input, setInput] = useState("");
-  const [error, setError] = useState<string>();
+  const [error, setError] = useState(errorProp);
   const [assetSymbol, setAssetSymbol] = useState("");
-  const [currency, setCurrency] = useState<Market>();
+  const [currency, setCurrency] = useState<Currency>();
   const [showResults, setShowResults] = useState(false);
 
-  const { data: assetData, loading, refetch } = useSearchAssetsBySymbol(input);
+  const errorMessage = error || errorProp;
+
   const {
     data: marketData,
-    loading: marketsLoading,
+    // loading: marketsLoading,
     refetch: marketsRefetch,
-  } = useGetMarkets(assetSymbol);
-
-  useEffect(() => {
-    if (input && showResults) {
-      refetch({ baseSymbol: input });
-    }
-  }, [input, refetch, showResults]);
+  } = useGetCurrencies(assetSymbol);
 
   useEffect(() => {
     if (assetSymbol) {
@@ -62,6 +58,12 @@ export const CurrencyForm = ({ onSubmit }: CurrencyFormProps) => {
     setInput(event.target.value);
   };
 
+  const handleSelect = (symbol: string) => {
+    setInput(symbol);
+    setAssetSymbol(symbol);
+    setShowResults(false);
+  };
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -75,7 +77,7 @@ export const CurrencyForm = ({ onSubmit }: CurrencyFormProps) => {
   return (
     <Wrapper>
       <Form>
-        <TextField error={Boolean(error)}>
+        <TextField error={Boolean(errorMessage)}>
           <Label htmlFor="code">Cryptocurrency code</Label>
           <Input
             type="text"
@@ -85,40 +87,14 @@ export const CurrencyForm = ({ onSubmit }: CurrencyFormProps) => {
             value={input}
             onChange={handleChange}
           />
-          {error && <HelperText htmlFor="code">{error}</HelperText>}
-          {showResults && (
-            <SearchResults>
-              {loading && <SearchResultInfo>Loading...</SearchResultInfo>}
-              {!loading && !assetData?.assets.length && (
-                <SearchResultInfo>No results</SearchResultInfo>
-              )}
-              {assetData &&
-                assetData.assets.map(({ assetSymbol, assetName }) => {
-                  const handleSetAsset = () => {
-                    setInput(assetSymbol);
-                    setAssetSymbol(assetSymbol);
-                    setShowResults(false);
-                  };
-
-                  const handleKeyDown = (event: React.KeyboardEvent) => {
-                    if (event.key === "Enter") {
-                      handleSetAsset();
-                    }
-                  };
-
-                  return (
-                    <SearchResultItem
-                      key={assetSymbol}
-                      tabIndex={0}
-                      onKeyDown={handleKeyDown}
-                      onClick={handleSetAsset}
-                    >
-                      {assetSymbol} - {assetName}
-                    </SearchResultItem>
-                  );
-                })}
-            </SearchResults>
+          {errorMessage && (
+            <HelperText htmlFor="code">{errorMessage}</HelperText>
           )}
+          <SearchResults
+            open={showResults}
+            query={input}
+            onSelect={handleSelect}
+          />
         </TextField>
         <Button type="submit" onClick={handleSubmit}>
           Add

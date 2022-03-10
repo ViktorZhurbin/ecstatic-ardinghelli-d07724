@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Market } from "../../types/Market";
+import { Currency } from "../../types/Currency";
 import { CurrencyForm } from "../CurrencyForm/CurrencyForm";
 import { CurrencyItem } from "../CurrencyItem/CurrencyItem";
 import { Footer } from "../Footer/Footer";
@@ -8,16 +8,25 @@ import { Header } from "../Header/Header";
 
 import { Main, Hint, Wrapper, Content, Left, Title } from "./Layout.style";
 
-const mockData: Market[] = [
+const mockData: Currency[] = [
   { baseSymbol: "BTC", ticker: { lastPrice: "8000" } },
   { baseSymbol: "LTC", ticker: { lastPrice: "50" } },
 ];
 
 export const Layout = () => {
   const [currencies, setCurrencies] = useState(mockData);
+  const [formError, setFormError] = useState<string>();
 
-  const handleAddMarket = (currency: Market) => {
-    setCurrencies([...currencies, currency]);
+  const handleAddCurrency = (currency: Currency) => {
+    const isUnique = !currencies.find(
+      ({ baseSymbol }) => baseSymbol === currency.baseSymbol
+    );
+
+    if (isUnique) {
+      setCurrencies([...currencies, currency]);
+    } else {
+      setFormError(`${currency.baseSymbol} is already listed`);
+    }
   };
 
   return (
@@ -52,7 +61,7 @@ export const Layout = () => {
             </div>
           </Content>
         </Left>
-        <CurrencyForm onSubmit={handleAddMarket} />
+        <CurrencyForm error={formError} onSubmit={handleAddCurrency} />
       </Main>
       <Footer />
     </Wrapper>

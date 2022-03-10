@@ -2,7 +2,7 @@ type Ticker = {
   lastPrice: string;
 } | null;
 
-export interface Market {
+export interface Currency {
   baseSymbol: string;
   ticker: Ticker;
 }
