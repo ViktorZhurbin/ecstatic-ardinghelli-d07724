@@ -15,7 +15,7 @@ import {
 } from "./CurrencyForm.style";
 
 export const CurrencyForm = () => {
-  const [input, setInput] = useState<string>();
+  const [input, setInput] = useState("");
   const [showResults, setShowResults] = useState(false);
 
   const { data, loading, refetch } = useSearchCurrenciesByCode(input);
