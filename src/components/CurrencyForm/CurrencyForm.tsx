@@ -31,25 +31,21 @@ export const CurrencyForm = ({
   const [currency, setCurrency] = useState<Currency>();
   const [showResults, setShowResults] = useState(false);
 
-  const {
-    data: marketData,
-    // loading: marketsLoading,
-    refetch: marketsRefetch,
-  } = useGetCurrencies(assetSymbol);
+  const { data, refetch } = useGetCurrencies(assetSymbol);
 
   useEffect(() => {
     if (assetSymbol) {
-      marketsRefetch({ symbol: assetSymbol });
+      refetch({ symbol: assetSymbol });
     }
-  }, [assetSymbol, marketsRefetch]);
+  }, [assetSymbol, refetch]);
 
   useEffect(() => {
     const currency =
-      marketData?.markets.find(({ ticker }) => Boolean(ticker?.lastPrice)) ||
-      marketData?.markets[0];
+      data?.markets.find(({ ticker }) => Boolean(ticker?.lastPrice)) ||
+      data?.markets[0];
 
     setCurrency(currency);
-  }, [marketData]);
+  }, [data]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setError(undefined);

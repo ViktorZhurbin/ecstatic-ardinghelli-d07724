@@ -13,7 +13,7 @@ export const SearchResults = ({
   query,
   onSelect,
 }: SearchResultsProps) => {
-  const { data: assetData, loading, refetch } = useSearchAssetsBySymbol(query);
+  const { data, loading, refetch } = useSearchAssetsBySymbol(query);
 
   useEffect(() => {
     if (query && open) {
@@ -28,28 +28,27 @@ export const SearchResults = ({
   return (
     <Wrapper>
       {loading && <Info>Loading...</Info>}
-      {!loading && !assetData?.assets.length && <Info>No results</Info>}
-      {assetData &&
-        assetData.assets.map(({ assetSymbol, assetName }) => {
-          const handleSetAsset = () => onSelect(assetSymbol);
+      {!loading && !data?.assets.length && <Info>No results</Info>}
+      {data?.assets.map(({ assetSymbol, assetName }) => {
+        const handleSetAsset = () => onSelect(assetSymbol);
 
-          const handleKeyDown = (event: React.KeyboardEvent) => {
-            if (event.key === "Enter") {
-              handleSetAsset();
-            }
-          };
+        const handleKeyDown = (event: React.KeyboardEvent) => {
+          if (event.key === "Enter") {
+            handleSetAsset();
+          }
+        };
 
-          return (
-            <Item
-              key={assetSymbol}
-              tabIndex={0}
-              onKeyDown={handleKeyDown}
-              onClick={handleSetAsset}
-            >
-              {assetSymbol} - {assetName}
-            </Item>
-          );
-        })}
+        return (
+          <Item
+            key={assetSymbol}
+            tabIndex={0}
+            onKeyDown={handleKeyDown}
+            onClick={handleSetAsset}
+          >
+            {assetSymbol} - {assetName}
+          </Item>
+        );
+      })}
     </Wrapper>
   );
 };
