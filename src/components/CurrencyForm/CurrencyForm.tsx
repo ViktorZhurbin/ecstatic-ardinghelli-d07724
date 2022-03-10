@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useSearchCurrenciesByCode } from "../../graphql/currency/search";
+import { useSearchAssetsBySymbol } from "../../graphql/asset/search";
 
 import {
   Button,
@@ -15,20 +15,20 @@ import {
 } from "./CurrencyForm.style";
 
 export const CurrencyForm = () => {
-  const [input, setInput] = useState("");
+  const [assetSymbol, setAssetSymbol] = useState("");
   const [showResults, setShowResults] = useState(false);
 
-  const { data, loading, refetch } = useSearchCurrenciesByCode(input);
+  const { data, loading, refetch } = useSearchAssetsBySymbol(assetSymbol);
 
   useEffect(() => {
-    if (input && showResults) {
-      refetch({ input });
+    if (assetSymbol && showResults) {
+      refetch({ assetSymbol });
     }
-  }, [input, refetch, showResults]);
+  }, [assetSymbol, refetch, showResults]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setShowResults(true);
-    setInput(event.target.value);
+    setAssetSymbol(event.target.value);
   };
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -45,7 +45,7 @@ export const CurrencyForm = () => {
             id="code"
             name="code"
             autoComplete="off"
-            value={input}
+            value={assetSymbol}
             onChange={handleChange}
           />
           {showResults && (
@@ -57,7 +57,7 @@ export const CurrencyForm = () => {
                 data.assets.length > 0 &&
                 data.assets.map(({ assetSymbol, assetName }) => {
                   const handleSetInput = () => {
-                    setInput(assetSymbol);
+                    setAssetSymbol(assetSymbol);
                     setShowResults(false);
                   };
 

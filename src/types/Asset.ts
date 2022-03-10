@@ -1,4 +1,4 @@
-export interface Currency {
+export interface Asset {
   assetName: string;
   assetSymbol: string;
 }
