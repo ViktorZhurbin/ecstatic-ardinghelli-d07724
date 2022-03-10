@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useClickAway } from "react-use";
 
 import { useGetCurrencies } from "../../graphql/currency/get";
 import { Currency } from "../../types/Currency";
@@ -32,6 +33,12 @@ export const CurrencyForm = ({
   const [showResults, setShowResults] = useState(false);
 
   const { data, refetch } = useGetCurrencies(assetSymbol);
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  useClickAway(ref, () => {
+    setShowResults(false);
+  });
 
   useEffect(() => {
     if (assetSymbol) {
@@ -84,6 +91,7 @@ export const CurrencyForm = ({
           />
           {error && <HelperText htmlFor="code">{error}</HelperText>}
           <SearchResults
+            ref={ref}
             open={showResults}
             query={input}
             onSelect={handleSelect}
