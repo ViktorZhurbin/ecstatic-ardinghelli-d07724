@@ -1,64 +1,57 @@
-import { ForwardedRef, forwardRef, useEffect } from "react";
+import { ForwardedRef, forwardRef } from "react";
 
-import { useSearchAssetsBySymbol } from "../../graphql/asset/search";
+import { Currency } from "../../types/Currency";
 import { Info, Item, Wrapper } from "./SearchResults.style";
 
 interface SearchResultsProps {
   open: boolean;
-  query: string;
+  loading: boolean;
+  currency?: Currency;
   onClose: () => void;
   onSelect: (symbol: string) => void;
 }
 
 export const SearchResults = forwardRef(
   (props: SearchResultsProps, ref: ForwardedRef<HTMLDivElement>) => {
-    const { open, query, onClose, onSelect } = props;
+    const { open, loading, currency, onClose, onSelect } = props;
 
-    const { data, loading, refetch } = useSearchAssetsBySymbol(query);
-
-    const noResults = !loading && !data?.assets.length;
-
-    useEffect(() => {
-      if (query && open) {
-        refetch({ baseSymbol: query });
-      }
-    }, [query, refetch, open]);
-
-    if (!open || !query) {
+    if (!open) {
       return null;
     }
 
+    if (loading) {
+      return (
+        <Wrapper ref={ref}>
+          <Info>Loading...</Info>
+        </Wrapper>
+      );
+    }
+
+    if (!currency) {
+      return (
+        <Wrapper ref={ref}>
+          <Info>No results</Info>
+        </Wrapper>
+      );
+    }
+
+    const handleSelect = () => onSelect(currency.baseSymbol);
+
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+      if (event.key === "Enter") {
+        handleSelect();
+      }
+
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
     return (
       <Wrapper ref={ref}>
-        {loading && <Info>Loading...</Info>}
-        {noResults ? (
-          <Info>No results</Info>
-        ) : (
-          data?.assets.map(({ assetSymbol, assetName }) => {
-            const handleSelect = () => onSelect(assetSymbol);
-
-            const handleKeyDown = (event: React.KeyboardEvent) => {
-              if (event.key === "Enter") {
-                handleSelect();
-              }
-
-              if (event.key === "Escape") {
-                onClose();
-              }
-            };
-
-            return (
-              <Item
-                key={assetSymbol}
-                tabIndex={0}
-                onKeyDown={handleKeyDown}
-                onClick={handleSelect}
-              >
-                {assetSymbol} - {assetName}
-              </Item>
-            );
-          })
-        )}
+        <Item tabIndex={0} onKeyDown={handleKeyDown} onClick={handleSelect}>
+          {currency.baseSymbol}
+        </Item>
       </Wrapper>
     );
   }

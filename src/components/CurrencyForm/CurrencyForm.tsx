@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useClickAway, useDebounce } from "react-use";
 
 import { useGetCurrencies } from "../../graphql/currency/get";
@@ -28,31 +28,19 @@ export const CurrencyForm = ({
   onSubmit,
 }: CurrencyFormProps) => {
   const [input, setInput] = useState("");
+  const [debouncedInput, setDebouncedInput] = useState("");
+  const [currency, setCurrency] = useState<Currency>();
   const [showResults, setShowResults] = useState(false);
 
-  const { data, refetch } = useGetCurrencies(input);
+  const { data, loading } = useGetCurrencies(debouncedInput);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const searchResultsRef = useRef<HTMLDivElement>(null);
 
-  useClickAway(searchResultsRef, () => {
-    setShowResults(false);
-  });
-
-  useDebounce(
-    () => {
-      if (input) {
-        refetch({ symbol: input });
-      }
-    },
-    500,
-    [input]
-  );
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setError(undefined);
     setShowResults(true);
-    setInput(event.target.value.toLocaleUpperCase());
+    setInput(event.target.value.toUpperCase());
   };
 
   const handleHideResults = () => {
@@ -73,10 +61,6 @@ export const CurrencyForm = ({
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const currency =
-      data?.markets.find(({ ticker }) => Boolean(ticker?.lastPrice)) ||
-      data?.markets[0];
-
     if (!currency) {
       setError(`No prices available for ${input}`);
 
@@ -92,11 +76,31 @@ export const CurrencyForm = ({
     }
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
+  const handleInputKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Escape") {
       handleHideResults();
     }
   };
+
+  useClickAway(searchResultsRef, () => {
+    setShowResults(false);
+  });
+
+  useDebounce(
+    () => {
+      setDebouncedInput(input);
+    },
+    400,
+    [input]
+  );
+
+  useEffect(() => {
+    const currency =
+      data?.markets.find(({ ticker }) => Boolean(ticker?.lastPrice)) ||
+      data?.markets[0];
+
+    setCurrency(currency);
+  }, [data]);
 
   return (
     <Wrapper>
@@ -111,14 +115,15 @@ export const CurrencyForm = ({
             autoComplete="off"
             spellCheck={false}
             value={input}
-            onKeyDown={handleKeyDown}
+            onKeyDown={handleInputKeyDown}
             onChange={handleChange}
           />
           {error && <HelperText htmlFor="code">{error}</HelperText>}
           <SearchResults
             ref={searchResultsRef}
-            open={showResults}
-            query={input}
+            open={showResults && Boolean(input)}
+            loading={loading}
+            currency={currency}
             onClose={handleCloseResults}
             onSelect={handleSelect}
           />
