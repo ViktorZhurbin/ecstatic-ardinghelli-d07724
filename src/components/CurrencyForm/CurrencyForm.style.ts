@@ -50,7 +50,7 @@ export const HelperText = styled.label`
   font-size: 0.75rem;
 `;
 
-export const Button = styled.button`
+export const Button = styled.input`
   --height: 40px;
 
   background-color: var(--color-orange);

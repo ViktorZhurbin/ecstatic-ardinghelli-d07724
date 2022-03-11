@@ -8,13 +8,8 @@ import { Header } from "../Header/Header";
 
 import { Main, Hint, Wrapper, Content, Left, Title } from "./Layout.style";
 
-const mockData: Currency[] = [
-  { baseSymbol: "BTC", ticker: { lastPrice: "8000" } },
-  { baseSymbol: "LTC", ticker: { lastPrice: "50" } },
-];
-
 export const Layout = () => {
-  const [currencies, setCurrencies] = useState(mockData);
+  const [currencies, setCurrencies] = useState<Currency[]>([]);
   const [formError, setFormError] = useState<string>();
 
   const handleAddCurrency = (currency: Currency) => {
@@ -26,7 +21,7 @@ export const Layout = () => {
       setFormError(undefined);
       setCurrencies([...currencies, currency]);
     } else {
-      setFormError(`${currency.baseSymbol} is already listed`);
+      return `${currency.baseSymbol} is already listed`;
     }
   };
 
