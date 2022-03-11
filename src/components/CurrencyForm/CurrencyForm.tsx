@@ -5,18 +5,9 @@ import { useGetCurrencies } from "../../graphql/currency/get";
 import { Currency } from "../../types/Currency";
 
 import { Button } from "../Button/Button";
+import { TextField } from "../TextField/TextField";
 
-import {
-  Form,
-  HelperText,
-  Input,
-  Label,
-  Terms,
-  TextField,
-  StyledSpinner,
-  Wrapper,
-  InputWrapper,
-} from "./CurrencyForm.style";
+import { Form, Terms, Wrapper } from "./CurrencyForm.style";
 
 interface CurrencyFormProps {
   error?: string;
@@ -81,23 +72,19 @@ export const CurrencyForm = ({
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit}>
-        <TextField error={Boolean(error)}>
-          <Label htmlFor="code">Cryptocurrency code</Label>
-          <InputWrapper>
-            <Input
-              ref={inputRef}
-              type="text"
-              id="code"
-              name="code"
-              autoComplete="off"
-              spellCheck={false}
-              value={input}
-              onChange={handleChange}
-            />
-            {loading && <StyledSpinner />}
-          </InputWrapper>
-          <HelperText htmlFor="code">{error}</HelperText>
-        </TextField>
+        <TextField
+          inputRef={inputRef}
+          error={error}
+          loading={loading}
+          type="text"
+          id="code"
+          label="Cryptocurrency code"
+          name="code"
+          autoComplete="off"
+          spellCheck={false}
+          value={input}
+          onChange={handleChange}
+        />
         <Button type="submit" disabled={!input || loading}>
           Add
         </Button>
