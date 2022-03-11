@@ -5,7 +5,7 @@ import { Currency } from "../../types/Currency";
 export const GET_CURRENCIES = gql`
   query currencies($symbol: String!) {
     markets(
-      filter: { baseSymbol: { _like: $symbol }, quoteSymbol: { _eq: "EUR" } }
+      filter: { baseSymbol: { _eq: $symbol }, quoteSymbol: { _eq: "EUR" } }
     ) {
       baseSymbol
       ticker {
@@ -15,8 +15,8 @@ export const GET_CURRENCIES = gql`
   }
 `;
 
-export const useGetCurrencies = (input?: string) =>
+export const useGetCurrencies = (symbol?: string) =>
   useQuery<{ markets: Currency[] }>(GET_CURRENCIES, {
-    variables: { symbol: `${input}%` },
-    skip: !input,
+    variables: { symbol },
+    skip: !symbol,
   });
