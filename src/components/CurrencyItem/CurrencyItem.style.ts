@@ -26,7 +26,7 @@ export const Info = styled.div`
   gap: 8px;
 `;
 
-export const Code = styled.div`
+export const Symbol = styled.div`
   font-size: 1.25rem;
 `;
 

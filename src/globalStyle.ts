@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
 
         --color-white: #fff;
         --color-black: rgba(0, 0, 0, 0.87);
+        --color-red: rgb(211, 47,47);
         --color-bg: #2a0a4a;
         --color-bg-grey: rgba(0, 0, 0, 0.12);
         --color-bg-light-grey: rgba(0, 0, 0, 0.04);

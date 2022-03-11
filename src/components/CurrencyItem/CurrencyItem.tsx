@@ -1,7 +1,7 @@
 import CupIcon from "../../../assets/icons/currencyCupWithCrown.svg";
 
 import {
-  Code,
+  Symbol,
   Info,
   Item,
   Price,
@@ -10,21 +10,33 @@ import {
 } from "./CurrencyItem.style";
 
 interface CurrencyItemProps {
-  code: string;
-  price: string;
+  symbol: string;
+  price?: string;
+  onClickRemove: () => void;
 }
 
-export const CurrencyItem = ({ code, price }: CurrencyItemProps) => {
+export const CurrencyItem = ({
+  symbol,
+  price,
+  onClickRemove,
+}: CurrencyItemProps) => {
+  const formattedPrice = !price
+    ? "N/A"
+    : new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR",
+      }).format(Number(price));
+
   return (
     <Wrapper>
       <Item>
         <CupIcon />
         <Info>
-          <Code>{code}</Code>
-          <Price>{price}</Price>
+          <Symbol>{symbol}</Symbol>
+          <Price>{formattedPrice}</Price>
         </Info>
       </Item>
-      <RemoveIcon />
+      <RemoveIcon onClick={onClickRemove} />
     </Wrapper>
   );
 };

@@ -1,4 +1,8 @@
+type Ticker = {
+  lastPrice: string;
+} | null;
+
 export interface Currency {
-  assetName: string;
-  assetSymbol: string;
+  baseSymbol: string;
+  ticker: Ticker;
 }
