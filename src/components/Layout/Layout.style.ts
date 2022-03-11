@@ -1,37 +1,57 @@
 import styled from "styled-components";
 
+import { COLORS } from "../../style/colors";
+import { SCREEN_SIZE } from "../../style/screen";
+
 import bg from "./assets/bg.png";
 import figure from "./assets/figure.png";
 
 export const Wrapper = styled.div`
-  --horizontal-padding: 80px;
+  --horizontal-padding: 30px;
 
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  color: var(--color-white);
-  background-color: var(--color-bg);
+  color: ${COLORS.WHITE};
+  background-color: ${COLORS.BG};
   background-image: url(${bg});
-  background-position: right -125% top -200px;
+  background-position: right -500px top;
   background-repeat: no-repeat;
   background-size: contain;
+
+  @media (min-width: ${SCREEN_SIZE.M}) {
+    --horizontal-padding: 80px;
+  }
 `;
 
 export const Main = styled.main`
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
+  display: grid;
+  gap: 20px;
+  justify-items: center;
   padding: 30px var(--horizontal-padding);
-  background-image: url(${figure});
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
+
+  @media (min-width: ${SCREEN_SIZE.M}) {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    align-items: start;
+  }
+
+  @media (min-width: ${SCREEN_SIZE.XL}) {
+    background-image: url(${figure});
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 35%;
+  }
 `;
 
 export const Left = styled.div`
   display: grid;
   gap: 20px;
-  width: 35%;
+
+  @media (min-width: ${SCREEN_SIZE.XL}) {
+    width: 35%;
+  }
 `;
 
 export const Title = styled.h1`
@@ -42,10 +62,13 @@ export const Title = styled.h1`
 export const Content = styled.div`
   display: grid;
   gap: 30px;
-  max-width: 300px;
+
+  @media (min-width: ${SCREEN_SIZE.M}) {
+    max-width: 300px;
+  }
 `;
 
 export const Hint = styled.h2`
-  color: var(--color-subtitle);
+  color: ${COLORS.SUBTITLE};
   font-weight: normal;
 `;

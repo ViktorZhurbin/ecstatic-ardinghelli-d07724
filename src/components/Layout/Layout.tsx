@@ -35,26 +35,28 @@ export const Layout = () => {
             <Hint>
               Just enter the cryptocurrency code on the form to the right
             </Hint>
-            <div>
-              {currencies.map(({ baseSymbol, ticker }) => {
-                const handleRemoveCurrency = () => {
-                  const filteredList = currencies.filter(
-                    (market) => market.baseSymbol !== baseSymbol
+            {currencies.length > 0 && (
+              <div>
+                {currencies.map(({ baseSymbol, ticker }) => {
+                  const handleRemoveCurrency = () => {
+                    const filteredList = currencies.filter(
+                      (market) => market.baseSymbol !== baseSymbol
+                    );
+
+                    setCurrencies(filteredList);
+                  };
+
+                  return (
+                    <CurrencyItem
+                      key={baseSymbol}
+                      symbol={baseSymbol}
+                      price={ticker?.lastPrice}
+                      onClickRemove={handleRemoveCurrency}
+                    />
                   );
-
-                  setCurrencies(filteredList);
-                };
-
-                return (
-                  <CurrencyItem
-                    key={baseSymbol}
-                    symbol={baseSymbol}
-                    price={ticker?.lastPrice}
-                    onClickRemove={handleRemoveCurrency}
-                  />
-                );
-              })}
-            </div>
+                })}
+              </div>
+            )}
           </Content>
         </Left>
         <CurrencyForm

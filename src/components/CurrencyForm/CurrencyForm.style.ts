@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
+import { COLORS } from "../../style/colors";
+
 export const Wrapper = styled.div`
-  background-color: var(--color-white);
+  background-color: ${COLORS.WHITE};
   padding: 36px;
-  width: 400px;
-  color: var(--color-grey);
+  max-width: 400px;
+  color: ${COLORS.GREY};
   display: grid;
   gap: 40px;
 `;
@@ -20,8 +22,7 @@ interface TextFieldProps {
 
 export const TextField = styled.div<TextFieldProps>`
   --horizontal-indent: 10px;
-  --color: ${(props) =>
-    props.error ? "var(--color-red)" : "var(--color-grey)"};
+  --color: ${(props) => (props.error ? COLORS.RED : COLORS.GREY)};
 
   position: relative;
   display: grid;
@@ -32,7 +33,7 @@ export const Label = styled.label`
   text-transform: uppercase;
   font-size: 0.6rem;
   transform: translate(var(--horizontal-indent), 50%);
-  background-color: var(--color-white);
+  background-color: ${COLORS.WHITE};
   width: max-content;
   padding: 0 4px;
 `;
@@ -53,9 +54,9 @@ export const HelperText = styled.label`
 export const Button = styled.input`
   --height: 40px;
 
-  background-color: var(--color-orange);
+  background-color: ${COLORS.ORANGE};
   border: none;
-  color: var(--color-white);
+  color: ${COLORS.WHITE};
   height: var(--height);
   border-radius: calc(var(--height) / 2);
   font-size: 0.875rem;
