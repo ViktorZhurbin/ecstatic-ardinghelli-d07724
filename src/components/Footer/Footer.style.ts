@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
+import { COLORS } from "../../style/colors";
 import { SCREEN_SIZE } from "../../style/screen";
 
 export const Wrapper = styled.footer`
-  background-color: var(--color-white);
-  color: var(--color-grey);
+  background-color: ${COLORS.WHITE};
+  color: ${COLORS.GREY};
   padding: 20px calc(var(--horizontal-padding));
 
   @media (min-width: ${SCREEN_SIZE.M}) {

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import { COLORS } from "../../style/colors";
 import { SCREEN_SIZE } from "../../style/screen";
 
 import bg from "./assets/bg.png";
@@ -11,8 +12,8 @@ export const Wrapper = styled.div`
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  color: var(--color-white);
-  background-color: var(--color-bg);
+  color: ${COLORS.WHITE};
+  background-color: ${COLORS.BG};
   background-image: url(${bg});
   background-position: right -500px top;
   background-repeat: no-repeat;
@@ -68,6 +69,6 @@ export const Content = styled.div`
 `;
 
 export const Hint = styled.h2`
-  color: var(--color-subtitle);
+  color: ${COLORS.SUBTITLE};
   font-weight: normal;
 `;

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { COLORS } from "../../style/colors";
+
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -7,12 +9,7 @@ export const Wrapper = styled.div`
   padding: 12px 0;
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  border-image: linear-gradient(
-      to right,
-      var(--color-subtitle),
-      75%,
-      var(--color-bg)
-    )
+  border-image: linear-gradient(to right, ${COLORS.SUBTITLE}, 75%, ${COLORS.BG})
     1;
 `;
 
@@ -32,7 +29,7 @@ export const Symbol = styled.div`
 
 export const Price = styled.div`
   font-size: 0.875rem;
-  color: var(--color-subtitle);
+  color: ${COLORS.SUBTITLE};
 `;
 
 export const RemoveIcon = styled.div`
@@ -58,7 +55,7 @@ export const RemoveIcon = styled.div`
     height: inherit;
     width: 2px;
     top: calc(var(--size) / 2);
-    background-color: var(--color-white);
+    background-color: ${COLORS.WHITE};
   }
 
   ::before {

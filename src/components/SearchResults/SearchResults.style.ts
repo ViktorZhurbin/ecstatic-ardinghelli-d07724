@@ -1,17 +1,19 @@
 import styled from "styled-components";
 
+import { COLORS } from "../../style/colors";
+
 export const Wrapper = styled.div`
   position: absolute;
-  color: var(--color-black);
-  background-color: var(--color-white);
+  color: ${COLORS.BLACK};
+  background-color: ${COLORS.WHITE};
   top: 100%;
   width: 100%;
   max-height: 38vh;
   overflow: auto;
   padding: 8px 0;
   border-radius: 4px;
-  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
-    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0px 0px 1px 0px rgb(0 0 0 / 20%), 0px 0px 1px 0px rgb(0 0 0 / 14%),
+    0px 1px 3px 0px ${COLORS.BG_GREY};
 `;
 
 export const Info = styled.div`
@@ -26,10 +28,10 @@ export const Item = styled(Info)`
   cursor: pointer;
 
   &:focus {
-    background-color: var(--color-bg-grey);
+    background-color: ${COLORS.BG_GREY};
   }
 
   &:hover {
-    background-color: var(--color-bg-light-grey);
+    background-color: ${COLORS.BG_LIGHT_GREY};
   }
 `;
