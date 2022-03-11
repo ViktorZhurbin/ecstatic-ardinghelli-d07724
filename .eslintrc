@@ -15,7 +15,6 @@
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:react/jsx-runtime",
-        "plugin:jest-dom/recommended",
         "plugin:prettier/recommended",
         "plugin:react-hooks/recommended",
         "plugin:@typescript-eslint/recommended"
