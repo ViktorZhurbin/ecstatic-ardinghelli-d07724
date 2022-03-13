@@ -3,18 +3,7 @@ import styled from "styled-components";
 import { COLORS } from "../../style/colors";
 import { FONT_SIZE } from "../../style/fontSizes";
 
-interface ButtonStyledProps {
-  loading?: boolean;
-}
-
-const disabledStyle = `
-  cursor: default;
-  color: ${COLORS.DISABLED_TEXT};
-  background-color: rgba(0, 0, 0, 0.12);
-  box-shadow: none;
-`;
-
-export const ButtonStyled = styled.button<ButtonStyledProps>`
+export const ButtonStyled = styled.button`
   --height: 40px;
 
   display: flex;
@@ -38,8 +27,9 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
   }
 
   &:disabled {
-    ${disabledStyle}
+    cursor: default;
+    color: ${COLORS.DISABLED_TEXT};
+    background-color: rgba(0, 0, 0, 0.12);
+    box-shadow: none;
   }
-
-  ${(props) => props.loading && disabledStyle}
 `;

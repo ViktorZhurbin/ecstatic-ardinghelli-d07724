@@ -13,7 +13,7 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   return (
-    <ButtonStyled loading={loading} disabled={disabled || loading} {...props}>
+    <ButtonStyled disabled={disabled || loading} {...props}>
       {loading ? <Spinner /> : children}
     </ButtonStyled>
   );
