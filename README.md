@@ -13,3 +13,4 @@ In the project directory, you can run:
 -   `yarn build` - builds the app for production to the `dist` folder.
 -   `yarn lint` - lints the project.
 -   `yarn test` - runs tests with Playwright
+    -   You might need to install required deps for this: `npx playwright install-deps`
