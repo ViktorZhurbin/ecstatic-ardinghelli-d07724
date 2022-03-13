@@ -5,6 +5,7 @@ import { FONT_SIZE } from "../../style/fontSizes";
 
 export const Wrapper = styled.div`
   background-color: ${COLORS.WHITE};
+  border-radius: 4px;
   padding: 36px;
   max-width: 400px;
   color: ${COLORS.GREY};

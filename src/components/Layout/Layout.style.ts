@@ -10,7 +10,7 @@ import figure from "./assets/figure.png";
 export const Wrapper = styled.div`
   --horizontal-padding: 30px;
 
-  height: 100vh;
+  min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
   color: ${COLORS.WHITE};
@@ -33,7 +33,7 @@ export const Main = styled.main`
 
   @media (min-width: ${SCREEN_SIZE.M}) {
     display: flex;
-    gap: 30px;
+    gap: 35px;
     justify-content: space-between;
     align-items: start;
   }
@@ -42,13 +42,18 @@ export const Main = styled.main`
     background-image: url(${figure});
     background-repeat: no-repeat;
     background-size: contain;
-    background-position: 35%;
+    background-position: 50%;
   }
 `;
 
 export const Left = styled.div`
   display: grid;
   gap: 20px;
+  justify-items: center;
+
+  @media (min-width: ${SCREEN_SIZE.M}) {
+    justify-items: start;
+  }
 
   @media (min-width: ${SCREEN_SIZE.XL}) {
     width: 35%;
@@ -63,9 +68,18 @@ export const Title = styled.h1`
 export const Content = styled.div`
   display: grid;
   gap: 30px;
+  max-width: 450px;
 
   @media (min-width: ${SCREEN_SIZE.M}) {
-    max-width: 300px;
+    max-width: 350px;
+  }
+
+  @media (min-width: ${SCREEN_SIZE.L}) {
+    max-width: 400px;
+  }
+
+  @media (min-width: ${SCREEN_SIZE.XL}) {
+    max-width: 450px;
   }
 `;
 
