@@ -8,6 +8,8 @@ import { Header } from "../Header/Header";
 
 import { Main, Hint, Wrapper, Content, Left, Title } from "./Layout.style";
 
+export const QUOTE_SYMBOL = "EUR";
+
 export const Layout = () => {
   const [currencies, setCurrencies] = useState<Currency[]>([]);
   const [formError, setFormError] = useState<string>();

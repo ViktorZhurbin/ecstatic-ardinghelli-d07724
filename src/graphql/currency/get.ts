@@ -1,11 +1,12 @@
 import { gql, useQuery } from "@apollo/client";
 
 import { Currency } from "../../types/Currency";
+import { QUOTE_SYMBOL } from "../../components/Layout/Layout";
 
 export const GET_CURRENCIES = gql`
   query currencies($symbol: String!) {
     markets(
-      filter: { baseSymbol: { _eq: $symbol }, quoteSymbol: { _eq: "EUR" } }
+      filter: { baseSymbol: { _eq: $symbol }, quoteSymbol: { _eq: ${QUOTE_SYMBOL} } }
     ) {
       baseSymbol
       ticker {
