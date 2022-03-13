@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useQuery } from "@apollo/client";
+import { useRef, useState } from "react";
 import { useDebounce } from "react-use";
 
-import { useGetCurrencies } from "../../graphql/currency/get";
 import { Currency } from "../../types/Currency";
+import { GET_CURRENCIES } from "../../graphql/currency/get";
 
 import { Button } from "../Button/Button";
 import { TextField } from "../TextField/TextField";
+import { QUOTE_SYMBOL } from "../Layout/Layout";
 
 import { Form, Terms, Wrapper } from "./CurrencyForm.style";
 
@@ -13,6 +15,10 @@ interface CurrencyFormProps {
   error?: string;
   setError: (error?: string) => void;
   onSubmit: (market: Currency) => string | void;
+}
+
+interface MarketsData {
+  markets: Currency[];
 }
 
 export const CurrencyForm = ({
@@ -24,15 +30,28 @@ export const CurrencyForm = ({
   const [debouncedInput, setDebouncedInput] = useState("");
   const [currency, setCurrency] = useState<Currency>();
 
-  const { data, loading } = useGetCurrencies(debouncedInput);
+  useDebounce(() => setDebouncedInput(input), 400, [input]);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-    }
-  };
+  const { loading } = useQuery<MarketsData>(GET_CURRENCIES, {
+    variables: { baseSymbol: debouncedInput, quoteSymbol: QUOTE_SYMBOL },
+    skip: !debouncedInput,
+    onCompleted: (data: MarketsData) => {
+      const currency =
+        data.markets.find(({ ticker }) => Boolean(ticker?.lastPrice)) ||
+        data.markets[0];
+
+      if (!currency) {
+        setError(`No prices available for ${debouncedInput}`);
+      } else {
+        setCurrency(currency);
+      }
+    },
+    onError: () => {
+      setError("There was an error fetching currencies data");
+    },
+  });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setError(undefined);
@@ -43,41 +62,17 @@ export const CurrencyForm = ({
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (!loading && !currency) {
-      setError(`No prices available for ${debouncedInput}`);
+    if (currency) {
+      const submitError = onSubmit(currency);
 
-      return;
-    }
-
-    if (!currency) {
-      return;
-    }
-
-    const submitError = onSubmit(currency);
-
-    if (submitError) {
-      setError(submitError);
-    } else {
-      setInput("");
-      setError(undefined);
+      if (submitError) {
+        setError(submitError);
+      } else {
+        setInput("");
+        setError(undefined);
+      }
     }
   };
-
-  useDebounce(
-    () => {
-      setDebouncedInput(input);
-    },
-    400,
-    [input]
-  );
-
-  useEffect(() => {
-    const currency =
-      data?.markets.find(({ ticker }) => Boolean(ticker?.lastPrice)) ||
-      data?.markets[0];
-
-    setCurrency(currency);
-  }, [data]);
 
   return (
     <Wrapper>
@@ -92,10 +87,13 @@ export const CurrencyForm = ({
           autoComplete="off"
           spellCheck={false}
           value={input}
-          onKeyDown={handleKeyDown}
           onChange={handleChange}
         />
-        <Button type="submit" disabled={!input} loading={loading}>
+        <Button
+          type="submit"
+          disabled={!input || Boolean(error)}
+          loading={loading}
+        >
           Add
         </Button>
       </Form>

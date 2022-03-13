@@ -15,15 +15,14 @@ export const Layout = () => {
   const [formError, setFormError] = useState<string>();
 
   const handleAddCurrency = (currency: Currency) => {
-    const isUnique = !currencies.find(
+    const isPresent = currencies.find(
       ({ baseSymbol }) => baseSymbol === currency.baseSymbol
     );
 
-    if (isUnique) {
-      setFormError(undefined);
-      setCurrencies([...currencies, currency]);
+    if (isPresent) {
+      return `${currency.baseSymbol} was already added`;
     } else {
-      return `${currency.baseSymbol} is already listed`;
+      setCurrencies([...currencies, currency]);
     }
   };
 
