@@ -9,4 +9,5 @@ export const COLORS = {
   LIGHT_GREY: "rgb(188 190 194)",
   GREY: "rgb(87 88 90)",
   ORANGE: "rgb(253 75 36)",
+  DISABLED_TEXT: "rgba(0, 0, 0, 0.26)",
 };

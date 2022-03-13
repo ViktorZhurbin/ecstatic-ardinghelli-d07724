@@ -9,8 +9,9 @@ interface ButtonStyledProps {
 
 const disabledStyle = `
   cursor: default;
-  color: ${COLORS.BLACK};
-  background-color: rgba(0, 0, 0, 0.26);
+  color: ${COLORS.DISABLED_TEXT};
+  background-color: rgba(0, 0, 0, 0.12);
+  box-shadow: none;
 `;
 
 export const ButtonStyled = styled.button<ButtonStyledProps>`

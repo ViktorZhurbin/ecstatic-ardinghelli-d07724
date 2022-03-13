@@ -1,4 +1,7 @@
 import styled, { keyframes } from "styled-components";
+import { lighten } from "polished";
+
+import { COLORS } from "../../style/colors";
 
 const rotation = keyframes`
   from {
@@ -11,11 +14,12 @@ const rotation = keyframes`
 
 const SPINNER_SIZE = "20px";
 const SPINNER_STROKE = "2px";
+
 export const SpinnerStyled = styled.div`
   height: ${SPINNER_SIZE};
   width: ${SPINNER_SIZE};
   animation: ${rotation} 1s infinite linear;
-  border: ${SPINNER_STROKE} solid rgba(255 255 255 / 20%);
+  border: ${SPINNER_STROKE} solid ${lighten(0.4, COLORS.DISABLED_TEXT)};
   border-radius: 100%;
 
   &::before {
@@ -29,7 +33,7 @@ export const SpinnerStyled = styled.div`
     border-width: ${SPINNER_STROKE};
     border-style: solid;
     border-color: transparent;
-    border-top-color: rgba(255 255 255 / 80%);
+    border-top-color: ${COLORS.DISABLED_TEXT};
     border-radius: 100%;
   }
 `;
