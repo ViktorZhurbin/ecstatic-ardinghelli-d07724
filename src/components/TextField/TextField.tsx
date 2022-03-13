@@ -9,7 +9,6 @@ import {
 interface TextFieldProps extends React.ComponentPropsWithRef<"input"> {
   inputRef: React.RefObject<HTMLInputElement>;
   error?: string;
-  loading: boolean;
   label: string;
 }
 
@@ -17,7 +16,6 @@ export const TextField = ({
   inputRef,
   error,
   label,
-  loading,
   id,
   ...props
 }: TextFieldProps) => {

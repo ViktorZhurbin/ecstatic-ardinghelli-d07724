@@ -85,7 +85,6 @@ export const CurrencyForm = ({
         <TextField
           inputRef={inputRef}
           error={error}
-          loading={loading}
           type="text"
           id="code"
           label="Cryptocurrency code"
