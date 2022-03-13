@@ -1,4 +1,5 @@
 import CupIcon from "../../../assets/icons/currencyCupWithCrown.svg";
+import { QUOTE_SYMBOL } from "../Layout/Layout";
 
 import {
   Symbol,
@@ -24,7 +25,7 @@ export const CurrencyItem = ({
     ? "N/A"
     : new Intl.NumberFormat("de-DE", {
         style: "currency",
-        currency: "EUR",
+        currency: QUOTE_SYMBOL,
       }).format(Number(price));
 
   return (

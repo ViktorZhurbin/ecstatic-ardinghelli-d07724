@@ -1,11 +1,12 @@
-import { gql, useQuery } from "@apollo/client";
-
-import { Currency } from "../../types/Currency";
+import { gql } from "@apollo/client";
 
 export const GET_CURRENCIES = gql`
-  query currencies($symbol: String!) {
+  query currencies($baseSymbol: String!, $quoteSymbol: String!) {
     markets(
-      filter: { baseSymbol: { _eq: $symbol }, quoteSymbol: { _eq: "EUR" } }
+      filter: {
+        baseSymbol: { _eq: $baseSymbol }
+        quoteSymbol: { _eq: $quoteSymbol }
+      }
     ) {
       baseSymbol
       ticker {
@@ -14,9 +15,3 @@ export const GET_CURRENCIES = gql`
     }
   }
 `;
-
-export const useGetCurrencies = (symbol?: string) =>
-  useQuery<{ markets: Currency[] }>(GET_CURRENCIES, {
-    variables: { symbol },
-    skip: !symbol,
-  });

@@ -1,27 +1,28 @@
 import { useState } from "react";
 
 import { Currency } from "../../types/Currency";
+import { Currencies } from "../Currencies/Currencies";
 import { CurrencyForm } from "../CurrencyForm/CurrencyForm";
-import { CurrencyItem } from "../CurrencyItem/CurrencyItem";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
 
 import { Main, Hint, Wrapper, Content, Left, Title } from "./Layout.style";
+
+export const QUOTE_SYMBOL = "EUR";
 
 export const Layout = () => {
   const [currencies, setCurrencies] = useState<Currency[]>([]);
   const [formError, setFormError] = useState<string>();
 
   const handleAddCurrency = (currency: Currency) => {
-    const isUnique = !currencies.find(
+    const isPresent = currencies.find(
       ({ baseSymbol }) => baseSymbol === currency.baseSymbol
     );
 
-    if (isUnique) {
-      setFormError(undefined);
-      setCurrencies([...currencies, currency]);
+    if (isPresent) {
+      return `${currency.baseSymbol} was already added`;
     } else {
-      return `${currency.baseSymbol} is already listed`;
+      setCurrencies([...currencies, currency]);
     }
   };
 
@@ -35,28 +36,7 @@ export const Layout = () => {
             <Hint>
               Just enter the cryptocurrency code on the form to the right
             </Hint>
-            {currencies.length > 0 && (
-              <div>
-                {currencies.map(({ baseSymbol, ticker }) => {
-                  const handleRemoveCurrency = () => {
-                    const filteredList = currencies.filter(
-                      (market) => market.baseSymbol !== baseSymbol
-                    );
-
-                    setCurrencies(filteredList);
-                  };
-
-                  return (
-                    <CurrencyItem
-                      key={baseSymbol}
-                      symbol={baseSymbol}
-                      price={ticker?.lastPrice}
-                      onClickRemove={handleRemoveCurrency}
-                    />
-                  );
-                })}
-              </div>
-            )}
+            <Currencies currencies={currencies} setCurrencies={setCurrencies} />
           </Content>
         </Left>
         <CurrencyForm
