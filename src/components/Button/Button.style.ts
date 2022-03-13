@@ -11,6 +11,7 @@ export const ButtonStyled = styled.button`
   border-radius: calc(var(--height) / 2);
   font-size: 0.875rem;
   cursor: pointer;
+  outline-color: ${COLORS.BLACK};
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
@@ -21,7 +22,8 @@ export const ButtonStyled = styled.button`
   }
 
   &:disabled {
-    cursor: arrow;
+    cursor: default;
+    color: ${COLORS.BLACK};
     background-color: rgba(0, 0, 0, 0.26);
   }
 `;
