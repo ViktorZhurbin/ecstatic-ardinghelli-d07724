@@ -21,7 +21,8 @@ export const InputWrapper = styled.div`
 export const Input = styled.input`
   flex: 1;
   border-radius: 4px;
-  border: 1px solid var(--color);
+  border: 1px solid ${COLORS.LIGHT_GREY};
+  outline-color: ${COLORS.BLACK};
   font-size: 0.875rem;
   line-height: 1.5;
   padding: 12px 35px 12px var(--horizontal-indent);
@@ -43,9 +44,17 @@ interface WrapperProps {
 
 export const Wrapper = styled.div<WrapperProps>`
   --horizontal-indent: 10px;
-  --color: ${(props) => (props.error ? COLORS.RED : COLORS.GREY)};
 
   position: relative;
   display: grid;
-  color: var(--color);
+
+  ${(props) =>
+    props.error &&
+    `
+    color: ${COLORS.RED};
+
+    ${Input} {
+      border-color: ${COLORS.RED};
+      outline-color: ${COLORS.RED};
+    }`}
 `;

@@ -6,6 +6,7 @@ export const COLORS = {
   BG_GREY: "rgba(0 0 0 / 12%)",
   BG_LIGHT_GREY: "rgba(0 0 0 / 4%)",
   SUBTITLE: "rgb(148 132 164)",
-  GREY: "rgb(188 190 194)",
+  LIGHT_GREY: "rgb(188 190 194)",
+  GREY: "rgb(87 88 90)",
   ORANGE: "rgb(253 75 36)",
 };
