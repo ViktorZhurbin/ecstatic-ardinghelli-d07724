@@ -1,7 +1,20 @@
+import { Spinner } from "../Spinner/Spinner";
+
 import { ButtonStyled } from "./Button.style";
 
-type ButtonProps = React.ComponentPropsWithoutRef<"button">;
+interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
+  loading?: boolean;
+}
 
-export const Button = ({ children, ...props }: ButtonProps) => {
-  return <ButtonStyled {...props}>{children}</ButtonStyled>;
+export const Button = ({
+  children,
+  disabled,
+  loading,
+  ...props
+}: ButtonProps) => {
+  return (
+    <ButtonStyled disabled={disabled || loading} {...props}>
+      {loading ? <Spinner /> : children}
+    </ButtonStyled>
+  );
 };

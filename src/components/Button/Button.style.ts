@@ -4,14 +4,17 @@ import { COLORS } from "../../style/colors";
 import { FONT_SIZE } from "../../style/fontSizes";
 
 export const ButtonStyled = styled.button`
-  --height: 40px;
+  --height: 45px;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: ${COLORS.ORANGE};
   border: none;
   color: ${COLORS.WHITE};
   height: var(--height);
   border-radius: calc(var(--height) / 2);
-  font-size: ${FONT_SIZE.body2};
+  font-size: ${FONT_SIZE.body1};
   cursor: pointer;
   outline-color: ${COLORS.BLACK};
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
@@ -25,7 +28,8 @@ export const ButtonStyled = styled.button`
 
   &:disabled {
     cursor: default;
-    color: ${COLORS.BLACK};
-    background-color: rgba(0, 0, 0, 0.26);
+    color: ${COLORS.DISABLED_TEXT};
+    background-color: rgba(0, 0, 0, 0.12);
+    box-shadow: none;
   }
 `;

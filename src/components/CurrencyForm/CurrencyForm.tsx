@@ -85,7 +85,6 @@ export const CurrencyForm = ({
         <TextField
           inputRef={inputRef}
           error={error}
-          loading={loading}
           type="text"
           id="code"
           label="Cryptocurrency code"
@@ -96,7 +95,7 @@ export const CurrencyForm = ({
           onKeyDown={handleKeyDown}
           onChange={handleChange}
         />
-        <Button type="submit" disabled={!input || loading}>
+        <Button type="submit" disabled={!input} loading={loading}>
           Add
         </Button>
       </Form>

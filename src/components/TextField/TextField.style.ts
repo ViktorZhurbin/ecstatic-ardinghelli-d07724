@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 import { COLORS } from "../../style/colors";
 import { FONT_SIZE } from "../../style/fontSizes";
-import { Spinner as _Spinner } from "../Spinner/Spinner";
 
 export const Label = styled.label`
   text-transform: uppercase;
@@ -26,12 +25,7 @@ export const Input = styled.input`
   outline-color: ${COLORS.BLACK};
   font-size: ${FONT_SIZE.body2};
   line-height: 1.5;
-  padding: 12px 35px 12px var(--horizontal-indent);
-`;
-
-export const StyledSpinner = styled(_Spinner)`
-  position: absolute;
-  right: 8px;
+  padding: 12px var(--horizontal-indent) 12px;
 `;
 
 export const HelperText = styled.label`
