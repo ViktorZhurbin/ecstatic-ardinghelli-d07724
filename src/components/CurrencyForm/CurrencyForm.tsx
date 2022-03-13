@@ -28,6 +28,12 @@ export const CurrencyForm = ({
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+  };
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setError(undefined);
     setCurrency(undefined);
@@ -37,9 +43,13 @@ export const CurrencyForm = ({
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (!currency) {
+    if (!loading && !currency) {
       setError(`No prices available for ${debouncedInput}`);
 
+      return;
+    }
+
+    if (!currency) {
       return;
     }
 
@@ -83,6 +93,7 @@ export const CurrencyForm = ({
           autoComplete="off"
           spellCheck={false}
           value={input}
+          onKeyDown={handleKeyDown}
           onChange={handleChange}
         />
         <Button type="submit" disabled={!input || loading}>
