@@ -3,7 +3,7 @@ https://ecstatic-ardinghelli-d07724.netlify.app
 
 ## Prepare
 
-Make a copy of `.env.example`, name it `.env`, and add values for the listed environment variables.
+Make a copy of `.env.example`, name it `.env`, and add values for the listed environment variables. (API seemed to work even without token, at least locally, but it might not be always true).
 
 ## Available Scripts
 
