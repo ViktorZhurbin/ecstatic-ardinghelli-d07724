@@ -28,7 +28,7 @@ export const CurrencyItem = ({
       }).format(Number(price));
 
   return (
-    <Wrapper>
+    <Wrapper data-testid="currencyItem">
       <Item>
         <CupIcon />
         <Info>
@@ -36,7 +36,7 @@ export const CurrencyItem = ({
           <Price>{formattedPrice}</Price>
         </Info>
       </Item>
-      <RemoveIcon onClick={onClickRemove} />
+      <RemoveIcon data-testid="removeIcon" onClick={onClickRemove} />
     </Wrapper>
   );
 };

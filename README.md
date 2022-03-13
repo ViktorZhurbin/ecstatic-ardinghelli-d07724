@@ -12,3 +12,4 @@ In the project directory, you can run:
 -   `yarn start` - development mode on `http://localhost:8080`
 -   `yarn build` - builds the app for production to the `dist` folder.
 -   `yarn lint` - lints the project.
+-   `yarn test` - runs tests with Playwright

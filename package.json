@@ -9,6 +9,8 @@
     "build": "webpack --config webpack/prod.ts",
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
+    "test": "playwright test",
+    "test:debug": "PWDEBUG=1 playwright test",
     "postinstall": "npx simple-git-hooks"
   },
   "simple-git-hooks": {
@@ -27,6 +29,7 @@
     "@babel/preset-env": "7.16.11",
     "@babel/preset-react": "7.16.7",
     "@babel/preset-typescript": "7.16.7",
+    "@playwright/test": "1.19.2",
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.4",
     "@svgr/webpack": "6.2.1",
     "@testing-library/react": "12.1.2",

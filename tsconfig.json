@@ -27,10 +27,9 @@
       "module": "CommonJS"
     }
   },
-  "include": [
-    "src",
-    "assets",
-    "webpack",
-    "declaration.d.ts"
+  "exclude": [
+    "node_modules",
+    "dist",
+    "playwright-report"
   ]
 }
