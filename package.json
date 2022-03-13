@@ -9,7 +9,8 @@
     "build": "webpack --config webpack/prod.ts",
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
-    "test": "playwright test",
+    "test": "PLAYWRIGHT_TEST_BASE_URL=http://localhost:8080 playwright test",
+    "test:ci": "playwright test",
     "test:debug": "PWDEBUG=1 playwright test",
     "postinstall": "npx simple-git-hooks"
   },
