@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { COLORS } from "../../style/colors";
+import { FONT_SIZE } from "../../style/fontSizes";
 import { SCREEN_SIZE } from "../../style/screen";
 
 import bg from "./assets/bg.png";
@@ -55,7 +56,7 @@ export const Left = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 2.5rem;
+  font-size: ${FONT_SIZE.h1};
   font-weight: normal;
 `;
 
@@ -70,5 +71,6 @@ export const Content = styled.div`
 
 export const Hint = styled.h2`
   color: ${COLORS.SUBTITLE};
+  font-size: ${FONT_SIZE.h2};
   font-weight: normal;
 `;

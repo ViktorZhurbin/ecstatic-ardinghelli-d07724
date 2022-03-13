@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { COLORS } from "../../style/colors";
+import { FONT_SIZE } from "../../style/fontSizes";
 
 export const Wrapper = styled.div`
   background-color: ${COLORS.WHITE};
@@ -17,6 +18,6 @@ export const Form = styled.form`
 `;
 
 export const Terms = styled.div`
-  font-size: 0.9rem;
+  font-size: ${FONT_SIZE.body2};
   text-align: center;
 `;

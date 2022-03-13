@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { COLORS } from "../../style/colors";
+import { FONT_SIZE } from "../../style/fontSizes";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -24,11 +25,11 @@ export const Info = styled.div`
 `;
 
 export const Symbol = styled.div`
-  font-size: 1.25rem;
+  font-size: ${FONT_SIZE.h3};
 `;
 
 export const Price = styled.div`
-  font-size: 0.875rem;
+  font-size: ${FONT_SIZE.body2};
   color: ${COLORS.SUBTITLE};
 `;
 

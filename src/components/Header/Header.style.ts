@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
+import { FONT_SIZE } from "../../style/fontSizes";
+
 export const Wrapper = styled.header`
   background-color: transparent;
-  font-size: 1.5rem;
+  font-size: ${FONT_SIZE.h2};
   padding: 30px var(--horizontal-padding);
 `;
 

@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 import { COLORS } from "../../style/colors";
+import { FONT_SIZE } from "../../style/fontSizes";
 import { Spinner as _Spinner } from "../Spinner/Spinner";
 
 export const Label = styled.label`
   text-transform: uppercase;
-  font-size: 0.6rem;
+  font-size: ${FONT_SIZE.label};
   transform: translate(var(--horizontal-indent), 50%);
   background-color: ${COLORS.WHITE};
   width: max-content;
@@ -23,7 +24,7 @@ export const Input = styled.input`
   border-radius: 4px;
   border: 1px solid ${COLORS.LIGHT_GREY};
   outline-color: ${COLORS.BLACK};
-  font-size: 0.875rem;
+  font-size: ${FONT_SIZE.body2};
   line-height: 1.5;
   padding: 12px 35px 12px var(--horizontal-indent);
 `;
@@ -35,7 +36,7 @@ export const StyledSpinner = styled(_Spinner)`
 
 export const HelperText = styled.label`
   margin: 3px var(--horizontal-indent) 0;
-  font-size: 0.75rem;
+  font-size: ${FONT_SIZE.caption};
 `;
 
 interface WrapperProps {

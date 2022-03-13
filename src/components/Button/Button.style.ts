@@ -1,5 +1,7 @@
 import styled from "styled-components";
+
 import { COLORS } from "../../style/colors";
+import { FONT_SIZE } from "../../style/fontSizes";
 
 export const ButtonStyled = styled.button`
   --height: 40px;
@@ -9,7 +11,7 @@ export const ButtonStyled = styled.button`
   color: ${COLORS.WHITE};
   height: var(--height);
   border-radius: calc(var(--height) / 2);
-  font-size: 0.875rem;
+  font-size: ${FONT_SIZE.body2};
   cursor: pointer;
   outline-color: ${COLORS.BLACK};
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
