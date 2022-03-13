@@ -15,7 +15,7 @@ export const SpinnerStyled = styled.div`
   height: ${SPINNER_SIZE};
   width: ${SPINNER_SIZE};
   animation: ${rotation} 1s infinite linear;
-  border: ${SPINNER_STROKE} solid rgba(0 0 0 / 20%);
+  border: ${SPINNER_STROKE} solid rgba(255 255 255 / 20%);
   border-radius: 100%;
 
   &::before {
@@ -24,12 +24,12 @@ export const SpinnerStyled = styled.div`
     position: absolute;
     left: -${SPINNER_STROKE};
     top: -${SPINNER_STROKE};
-    height: 100%;
-    width: 100%;
+    height: ${SPINNER_SIZE};
+    width: ${SPINNER_SIZE};
     border-width: ${SPINNER_STROKE};
     border-style: solid;
     border-color: transparent;
-    border-top-color: rgba(0 0 0 / 80%);
+    border-top-color: rgba(255 255 255 / 80%);
     border-radius: 100%;
   }
 `;

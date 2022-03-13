@@ -96,7 +96,7 @@ export const CurrencyForm = ({
           onKeyDown={handleKeyDown}
           onChange={handleChange}
         />
-        <Button type="submit" disabled={!input || loading}>
+        <Button type="submit" disabled={!input} loading={loading}>
           Add
         </Button>
       </Form>

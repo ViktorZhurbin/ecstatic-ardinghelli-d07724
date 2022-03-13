@@ -3,9 +3,22 @@ import styled from "styled-components";
 import { COLORS } from "../../style/colors";
 import { FONT_SIZE } from "../../style/fontSizes";
 
-export const ButtonStyled = styled.button`
+interface ButtonStyledProps {
+  loading?: boolean;
+}
+
+const disabledStyle = `
+  cursor: default;
+  color: ${COLORS.BLACK};
+  background-color: rgba(0, 0, 0, 0.26);
+`;
+
+export const ButtonStyled = styled.button<ButtonStyledProps>`
   --height: 40px;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: ${COLORS.ORANGE};
   border: none;
   color: ${COLORS.WHITE};
@@ -24,8 +37,8 @@ export const ButtonStyled = styled.button`
   }
 
   &:disabled {
-    cursor: default;
-    color: ${COLORS.BLACK};
-    background-color: rgba(0, 0, 0, 0.26);
+    ${disabledStyle}
   }
+
+  ${(props) => props.loading && disabledStyle}
 `;
