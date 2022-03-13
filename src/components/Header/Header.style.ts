@@ -10,4 +10,5 @@ export const Logo = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
+  font-family: "Roboto Slab", serif;
 `;
